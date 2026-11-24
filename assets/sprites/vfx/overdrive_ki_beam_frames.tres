@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dbdkussaf1w16"]
+
+[ext_resource type="Texture2D" uid="uid://b25jyam0jx6ru" path="res://assets/sprites/vfx/overdrive_ki_beam.png" id="1_16um5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74dpf"]
+atlas = ExtResource("1_16um5")
+region = Rect2(0, 0, 160, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27j7b"]
+atlas = ExtResource("1_16um5")
+region = Rect2(160, 0, 160, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vp7og"]
+atlas = ExtResource("1_16um5")
+region = Rect2(320, 0, 160, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2l68"]
+atlas = ExtResource("1_16um5")
+region = Rect2(480, 0, 160, 80)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74dpf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27j7b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vp7og")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2l68")
+}],
+"loop": false,
+"name": &"beam",
+"speed": 12.0
+}]

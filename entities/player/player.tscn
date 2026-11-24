@@ -1,0 +1,136 @@
+[gd_scene load_steps=28 format=3]
+
+[ext_resource type="Script" path="res://entities/player/player.gd" id="1_player"]
+[ext_resource type="Script" path="res://core/components/hitbox_component.gd" id="2_hitbox"]
+[ext_resource type="Script" path="res://core/components/hurtbox_component.gd" id="3_hurtbox"]
+[ext_resource type="Script" path="res://core/components/health_component.gd" id="4_health"]
+[ext_resource type="Script" path="res://core/components/stats_component.gd" id="5_stats"]
+[ext_resource type="Script" path="res://core/components/weapon_component.gd" id="6_weapon"]
+[ext_resource type="Script" path="res://core/components/ki_component.gd" id="7_ki"]
+[ext_resource type="Script" path="res://core/state_machine/state_machine.gd" id="8_sm"]
+[ext_resource type="Script" path="res://entities/player/states/player_idle.gd" id="9_idle"]
+[ext_resource type="Script" path="res://entities/player/states/player_move.gd" id="10_move"]
+[ext_resource type="Script" path="res://entities/player/states/player_jump.gd" id="11_jump"]
+[ext_resource type="Script" path="res://entities/player/states/player_fall.gd" id="12_fall"]
+[ext_resource type="Script" path="res://entities/player/states/player_dash.gd" id="13_dash"]
+[ext_resource type="Script" path="res://entities/player/states/player_attack.gd" id="14_attack"]
+[ext_resource type="Script" path="res://entities/player/states/player_ki_blast.gd" id="15_kiblast"]
+[ext_resource type="Script" path="res://entities/player/states/player_power_up.gd" id="16_powerup"]
+[ext_resource type="Script" path="res://entities/player/states/player_air_attack.gd" id="21_air_attack"]
+[ext_resource type="Script" path="res://entities/player/states/player_dash_attack.gd" id="22_dash_attack"]
+[ext_resource type="Script" path="res://entities/player/states/player_power_down.gd" id="23_powerdown"]
+[ext_resource type="Script" path="res://entities/player/states/player_special_skill.gd" id="24_special"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/player/child/child_sprite_frames.tres" id="17_child_sf"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/vfx/ki_aura_frames.tres" id="18_aura_sf"]
+[ext_resource type="Shader" path="res://assets/shaders/palette_swap.gdshader" id="19_pal_shader"]
+[ext_resource type="Shader" path="res://assets/shaders/aura_remap.gdshader" id="20_aura_shader"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(20, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hitbox"]
+size = Vector2(46, 36)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aura"]
+shader = ExtResource("20_aura_shader")
+shader_parameter/aura_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_player"]
+shader = ExtResource("19_pal_shader")
+shader_parameter/transform_mode = 0
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("1_player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -26)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="VisualPivot" type="Node2D" parent="."]
+
+[node name="KiAura" type="AnimatedSprite2D" parent="VisualPivot"]
+visible = false
+material = SubResource("ShaderMaterial_aura")
+position = Vector2(0, -44)
+sprite_frames = ExtResource("18_aura_sf")
+animation = &"aura"
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="VisualPivot"]
+material = SubResource("ShaderMaterial_player")
+position = Vector2(0, -44)
+sprite_frames = ExtResource("17_child_sf")
+animation = &"idle"
+
+[node name="HitboxComponent" type="Area2D" parent="VisualPivot"]
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("2_hitbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisualPivot/HitboxComponent"]
+position = Vector2(29, -26)
+shape = SubResource("RectangleShape2D_hitbox")
+disabled = true
+
+[node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+collision_layer = 2
+collision_mask = 32
+script = ExtResource("3_hurtbox")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, -26)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_health")
+
+[node name="KiComponent" type="Node" parent="."]
+script = ExtResource("7_ki")
+
+[node name="StatsComponent" type="Node" parent="."]
+script = ExtResource("5_stats")
+
+[node name="WeaponComponent" type="Node" parent="."]
+script = ExtResource("6_weapon")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("8_sm")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("9_idle")
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource("10_move")
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource("11_jump")
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("12_fall")
+
+[node name="Dash" type="Node" parent="StateMachine"]
+script = ExtResource("13_dash")
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("14_attack")
+
+[node name="AirAttack" type="Node" parent="StateMachine"]
+script = ExtResource("21_air_attack")
+
+[node name="DashAttack" type="Node" parent="StateMachine"]
+script = ExtResource("22_dash_attack")
+
+[node name="KiBlast" type="Node" parent="StateMachine"]
+script = ExtResource("15_kiblast")
+
+[node name="PowerUp" type="Node" parent="StateMachine"]
+script = ExtResource("16_powerup")
+
+[node name="PowerDown" type="Node" parent="StateMachine"]
+script = ExtResource("23_powerdown")
+
+[node name="SpecialSkill" type="Node" parent="StateMachine"]
+script = ExtResource("24_special")

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/dialogues/dialogue_data.gd" id="1_dlg"]
+
+[resource]
+script = ExtResource("1_dlg")
+id = &"master_turn_in_2"
+speaker_name = "Master Kael"
+lines = Array[String](["Four more years of relentless training have forged your peak self...", "You are now a full ADULT warrior! Together with Fusion [F], no shadow of the past can stop you."])

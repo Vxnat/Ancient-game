@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/quests/quest_data.gd" id="1_quest"]
+
+[resource]
+script = ExtResource("1_quest")
+id = &"village_trial"
+title = "Trial of Strength"
+description = "Defeat 2 Training Dummies to sharpen your combat form."
+giver_npc_id = &"npc_elder"
+objective_type = 0
+target_id = &"training_dummy"
+required_amount = 2
+reward_essence = 100
+reward_skill_id = &""

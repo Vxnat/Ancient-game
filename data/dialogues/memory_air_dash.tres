@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/dialogues/dialogue_data.gd" id="1_dlg"]
+
+[resource]
+script = ExtResource("1_dlg")
+id = &"memory_air_dash"
+speaker_name = "Echo of Home"
+lines = Array[String](["[Memory Fragment] Skies torn apart... warriors soaring through shattered stone...", "Awakened Ability: AIR-DASH! Press [Shift] while airborne to dash across wide chasms."])

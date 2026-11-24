@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/hud/phase1_hud.gd" id="1_hud"]
+
+[node name="Phase1HUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+
+[node name="Panel" type="PanelContainer" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 216.0
+offset_bottom = 86.0
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+
+[node name="HpLabel" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "HP: 100 / 100"
+
+[node name="StateLabel" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "State: Idle"
+
+[node name="WeaponLabel" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Weapon: Iron Blade (8/8)"
+
+[node name="EssenceLabel" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Essence: 0"
+
+[node name="ControlsLabel" type="Label" parent="."]
+offset_left = 8.0
+offset_top = 340.0
+offset_right = 460.0
+offset_bottom = 356.0
+theme_override_font_sizes/font_size = 9
+text = "A/D: Move  |  Space: Jump  |  Shift: Dash  |  J: Attack  |  E: Repair at Shrine"

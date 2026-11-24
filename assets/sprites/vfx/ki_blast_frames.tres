@@ -1,0 +1,73 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://cidt21rp4swqn"]
+
+[ext_resource type="Texture2D" uid="uid://bvp5xa0sgk31d" path="res://assets/sprites/vfx/ki_blast_fly.png" id="1_nmn61"]
+[ext_resource type="Texture2D" uid="uid://dfksle0moldxy" path="res://assets/sprites/vfx/ki_blast_hit.png" id="2_kokw7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cl5dj"]
+atlas = ExtResource("1_nmn61")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6f5vo"]
+atlas = ExtResource("1_nmn61")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7q86"]
+atlas = ExtResource("1_nmn61")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrymn"]
+atlas = ExtResource("1_nmn61")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8g2b"]
+atlas = ExtResource("2_kokw7")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vm4jb"]
+atlas = ExtResource("2_kokw7")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpm4t"]
+atlas = ExtResource("2_kokw7")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnv4b"]
+atlas = ExtResource("2_kokw7")
+region = Rect2(144, 0, 48, 48)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cl5dj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6f5vo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q7q86")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lrymn")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 14.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8g2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vm4jb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpm4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnv4b")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 18.0
+}]

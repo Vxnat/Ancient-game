@@ -1,0 +1,148 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/hud/game_hud.gd" id="1_hud"]
+
+[node name="GameHUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+
+[node name="TopLeft" type="PanelContainer" parent="."]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 266.0
+offset_bottom = 160.0
+
+[node name="Margin" type="MarginContainer" parent="TopLeft"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+
+[node name="VBox" type="VBoxContainer" parent="TopLeft/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="HpRow" type="HBoxContainer" parent="TopLeft/Margin/VBox"]
+layout_mode = 2
+
+[node name="HpTag" type="Label" parent="TopLeft/Margin/VBox/HpRow"]
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "HP"
+
+[node name="HpBar" type="ProgressBar" parent="TopLeft/Margin/VBox/HpRow"]
+modulate = Color(0.95, 0.3, 0.3, 1)
+custom_minimum_size = Vector2(110, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 100.0
+show_percentage = false
+
+[node name="HpValue" type="Label" parent="TopLeft/Margin/VBox/HpRow"]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "100/100"
+horizontal_alignment = 2
+
+[node name="KiRow" type="HBoxContainer" parent="TopLeft/Margin/VBox"]
+layout_mode = 2
+
+[node name="KiTag" type="Label" parent="TopLeft/Margin/VBox/KiRow"]
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "KI"
+
+[node name="KiBar" type="ProgressBar" parent="TopLeft/Margin/VBox/KiRow"]
+modulate = Color(0.35, 0.88, 1, 1)
+custom_minimum_size = Vector2(110, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 100.0
+show_percentage = false
+
+[node name="KiValue" type="Label" parent="TopLeft/Margin/VBox/KiRow"]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "100/100"
+horizontal_alignment = 2
+
+[node name="WeaponLabel" type="Label" parent="TopLeft/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "Weapon: Traveler's Staff (8/8)"
+
+[node name="InfoRow" type="HBoxContainer" parent="TopLeft/Margin/VBox"]
+layout_mode = 2
+
+[node name="EssenceLabel" type="Label" parent="TopLeft/Margin/VBox/InfoRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 9
+text = "Essence: 0"
+
+[node name="StateLabel" type="Label" parent="TopLeft/Margin/VBox/InfoRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "State: Idle"
+horizontal_alignment = 2
+
+[node name="AbilityRow" type="HBoxContainer" parent="TopLeft/Margin/VBox"]
+layout_mode = 2
+
+[node name="StageLabel" type="Label" parent="TopLeft/Margin/VBox/AbilityRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+text = "Form: CHILD"
+
+[node name="AirDashLabel" type="Label" parent="TopLeft/Margin/VBox/AbilityRow"]
+modulate = Color(0.6, 0.65, 0.75, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Air-Dash: OFF"
+horizontal_alignment = 2
+
+[node name="OverdriveLabel" type="Label" parent="TopLeft/Margin/VBox"]
+modulate = Color(0.6, 0.65, 0.75, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Overdrive [L]: LOCKED (Adult)"
+
+[node name="SpecialSkillLabel" type="Label" parent="TopLeft/Margin/VBox"]
+modulate = Color(0.6, 0.65, 0.75, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Beam [U]: LOCKED (Transform)"
+
+[node name="FusionLabel" type="Label" parent="TopLeft/Margin/VBox"]
+modulate = Color(0.6, 0.65, 0.75, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Fusion [F]: LOCKED (Need Disciple)"
+
+[node name="OverdriveBadge" type="Label" parent="TopLeft/Margin/VBox"]
+visible = false
+modulate = Color(1, 0.82, 0.28, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "[ OVERDRIVE ACTIVE ]"
+
+[node name="ControlsLabel" type="Label" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -18.0
+offset_right = -8.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 8
+text = "A/D: Move | Space: Jump | Shift: Dash | J: Attack | K: Ki | L: Overdrive | U: Beam | F: Fusion | T: Test Adult | E: Interact | Esc: Pause"

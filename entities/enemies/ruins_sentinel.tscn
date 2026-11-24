@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://entities/enemies/ruins_sentinel.gd" id="1_boss"]
+[ext_resource type="Script" path="res://core/components/health_component.gd" id="2_health"]
+[ext_resource type="Script" path="res://core/components/hurtbox_component.gd" id="3_hurtbox"]
+[ext_resource type="Script" path="res://core/components/hitbox_component.gd" id="4_hitbox"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_boss"]
+size = Vector2(42, 74)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_boss_hit"]
+size = Vector2(52, 54)
+
+[node name="RuinsSentinel" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 1
+script = ExtResource("1_boss")
+aggro_range = 320.0
+lunge_speed = 320.0
+gravity = 1150.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -37)
+shape = SubResource("RectangleShape2D_boss")
+
+[node name="VisualPivot" type="Node2D" parent="."]
+
+[node name="BodyRect" type="ColorRect" parent="VisualPivot"]
+offset_left = -21.0
+offset_top = -74.0
+offset_right = 21.0
+offset_bottom = 0.0
+color = Color(0.55, 0.16, 0.36, 1)
+
+[node name="CoreEyeRect" type="ColorRect" parent="VisualPivot"]
+offset_left = 4.0
+offset_top = -56.0
+offset_right = 16.0
+offset_bottom = -44.0
+color = Color(0.45, 0.95, 1, 1)
+
+[node name="HitboxComponent" type="Area2D" parent="VisualPivot"]
+collision_layer = 32
+collision_mask = 6
+script = ExtResource("4_hitbox")
+damage = 22.0
+knockback_force = Vector2(220, -100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisualPivot/HitboxComponent"]
+position = Vector2(24, -32)
+shape = SubResource("RectangleShape2D_boss_hit")
+disabled = true
+
+[node name="TitleLabel" type="Label" parent="."]
+offset_left = -75.0
+offset_top = -104.0
+offset_right = 75.0
+offset_bottom = -88.0
+theme_override_font_sizes/font_size = 10
+text = "Ruins Sentinel (220/220)"
+horizontal_alignment = 1
+
+[node name="HpBar" type="ProgressBar" parent="."]
+modulate = Color(0.95, 0.25, 0.45, 1)
+offset_left = -46.0
+offset_top = -86.0
+offset_right = 46.0
+offset_bottom = -78.0
+max_value = 220.0
+value = 220.0
+show_percentage = false
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_health")
+max_health = 220.0
+
+[node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+collision_layer = 8
+collision_mask = 16
+script = ExtResource("3_hurtbox")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, -37)
+shape = SubResource("RectangleShape2D_boss")

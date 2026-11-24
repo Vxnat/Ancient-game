@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/dialogues/dialogue_data.gd" id="1_dlg"]
+
+[resource]
+script = ExtResource("1_dlg")
+id = &"master_intro_1"
+speaker_name = "Master Kael"
+lines = Array[String](["I sense latent warrior blood inside you, young one.", "A captive warrior is held by the Prison Warden deep inside the Ancient Ruins. Defeat the Warden, free them, and return to me."])

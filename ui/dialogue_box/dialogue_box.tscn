@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/dialogue_box/dialogue_box.gd" id="1_dialogue"]
+
+[node name="DialogueBox" type="CanvasLayer"]
+layer = 25
+script = ExtResource("1_dialogue")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -104.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 18
+
+[node name="Panel" type="PanelContainer" parent="Root/Margin"]
+layout_mode = 2
+
+[node name="InnerMargin" type="MarginContainer" parent="Root/Margin/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 8
+
+[node name="VBox" type="VBoxContainer" parent="Root/Margin/Panel/InnerMargin"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SpeakerLabel" type="Label" parent="Root/Margin/Panel/InnerMargin/VBox"]
+modulate = Color(1, 0.82, 0.35, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Speaker"
+
+[node name="LineLabel" type="Label" parent="Root/Margin/Panel/InnerMargin/VBox"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Dialogue text..."
+autowrap_mode = 3
+
+[node name="PromptLabel" type="Label" parent="Root/Margin/Panel/InnerMargin/VBox"]
+modulate = Color(0.7, 0.78, 0.9, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "[E / Space] Next"
+horizontal_alignment = 2

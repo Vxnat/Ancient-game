@@ -1,0 +1,182 @@
+[gd_scene load_steps=20 format=3]
+
+[ext_resource type="PackedScene" path="res://entities/player/player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://core/components/game_camera.gd" id="2_camera"]
+[ext_resource type="PackedScene" path="res://entities/enemies/ruins_stalker.tscn" id="3_stalker"]
+[ext_resource type="PackedScene" path="res://entities/enemies/ruins_sentinel.tscn" id="4_boss"]
+[ext_resource type="PackedScene" path="res://world/shared/checkpoint.tscn" id="5_checkpoint"]
+[ext_resource type="PackedScene" path="res://world/shared/portal.tscn" id="6_portal"]
+[ext_resource type="PackedScene" path="res://world/shared/essence_cache.tscn" id="7_cache"]
+[ext_resource type="PackedScene" path="res://ui/hud/game_hud.tscn" id="8_hud"]
+[ext_resource type="PackedScene" path="res://ui/quest_log/quest_tracker.tscn" id="9_tracker"]
+[ext_resource type="PackedScene" path="res://ui/awakening_menu/awakening_menu.tscn" id="10_menu"]
+[ext_resource type="PackedScene" path="res://ui/dialogue_box/dialogue_box.tscn" id="11_dialogue"]
+[ext_resource type="PackedScene" path="res://entities/enemies/prison_warden.tscn" id="12_warden"]
+[ext_resource type="PackedScene" path="res://world/shared/captive_ally.tscn" id="13_captive"]
+[ext_resource type="PackedScene" path="res://entities/allies/disciple.tscn" id="14_disciple"]
+[ext_resource type="PackedScene" path="res://ui/menus/pause_menu.tscn" id="15_pause"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor_ruins"]
+size = Vector2(2880, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_ruins"]
+size = Vector2(32, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_sm"]
+size = Vector2(180, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_md"]
+size = Vector2(220, 18)
+
+[node name="AncientRuins" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -10
+offset_left = -240.0
+offset_top = -320.0
+offset_right = 3120.0
+offset_bottom = 640.0
+color = Color(0.06, 0.05, 0.11, 1)
+
+[node name="DefaultSpawn" type="Marker2D" parent="."]
+position = Vector2(140, 480)
+
+[node name="FromVillageSpawn" type="Marker2D" parent="."]
+position = Vector2(140, 480)
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="Ground" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1440, 510)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground"]
+shape = SubResource("RectangleShape2D_floor_ruins")
+
+[node name="ColorRect" type="ColorRect" parent="Geometry/Ground"]
+offset_left = -1440.0
+offset_top = -30.0
+offset_right = 1440.0
+offset_bottom = 30.0
+color = Color(0.16, 0.14, 0.24, 1)
+
+[node name="LeftWall" type="StaticBody2D" parent="Geometry"]
+position = Vector2(-16, 240)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/LeftWall"]
+shape = SubResource("RectangleShape2D_wall_ruins")
+
+[node name="ColorRect" type="ColorRect" parent="Geometry/LeftWall"]
+offset_left = -16.0
+offset_top = -300.0
+offset_right = 16.0
+offset_bottom = 300.0
+color = Color(0.12, 0.1, 0.19, 1)
+
+[node name="RightWall" type="StaticBody2D" parent="Geometry"]
+position = Vector2(2896, 240)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/RightWall"]
+shape = SubResource("RectangleShape2D_wall_ruins")
+
+[node name="ColorRect" type="ColorRect" parent="Geometry/RightWall"]
+offset_left = -16.0
+offset_top = -300.0
+offset_right = 16.0
+offset_bottom = 300.0
+color = Color(0.12, 0.1, 0.19, 1)
+
+[node name="PlatformStep" type="StaticBody2D" parent="Geometry"]
+position = Vector2(760, 414)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/PlatformStep"]
+shape = SubResource("RectangleShape2D_plat_sm")
+
+[node name="ColorRect" type="ColorRect" parent="Geometry/PlatformStep"]
+offset_left = -90.0
+offset_top = -9.0
+offset_right = 90.0
+offset_bottom = 9.0
+color = Color(0.24, 0.2, 0.36, 1)
+
+[node name="PlatformMid" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1020, 339)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/PlatformMid"]
+shape = SubResource("RectangleShape2D_plat_md")
+
+[node name="ColorRect" type="ColorRect" parent="Geometry/PlatformMid"]
+offset_left = -110.0
+offset_top = -9.0
+offset_right = 110.0
+offset_bottom = 9.0
+color = Color(0.24, 0.2, 0.36, 1)
+
+[node name="SecretAirDashLedge" type="StaticBody2D" parent="Geometry"]
+position = Vector2(540, 264)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/SecretAirDashLedge"]
+shape = SubResource("RectangleShape2D_plat_sm")
+
+[node name="ColorRect" type="ColorRect" parent="Geometry/SecretAirDashLedge"]
+offset_left = -90.0
+offset_top = -9.0
+offset_right = 90.0
+offset_bottom = 9.0
+color = Color(0.32, 0.26, 0.5, 1)
+
+[node name="PortalToVillage" parent="." instance=ExtResource("6_portal")]
+position = Vector2(64, 480)
+target_scene_path = "res://world/peaceful_planet/peaceful_village.tscn"
+target_spawn_point = &"FromRuinsSpawn"
+portal_label = "Return to Village"
+
+[node name="Checkpoint" parent="." instance=ExtResource("5_checkpoint")]
+position = Vector2(1360, 480)
+
+[node name="EssenceCache" parent="." instance=ExtResource("7_cache")]
+position = Vector2(540, 255)
+
+[node name="RuinsStalker1" parent="." instance=ExtResource("3_stalker")]
+position = Vector2(540, 480)
+
+[node name="RuinsStalker2" parent="." instance=ExtResource("3_stalker")]
+position = Vector2(1020, 330)
+
+[node name="RuinsSentinel" parent="." instance=ExtResource("4_boss")]
+position = Vector2(1880, 480)
+
+[node name="PrisonWarden" parent="." instance=ExtResource("12_warden")]
+position = Vector2(2500, 480)
+
+[node name="CaptiveAlly" parent="." instance=ExtResource("13_captive")]
+position = Vector2(2740, 480)
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(140, 480)
+
+[node name="Disciple" parent="." instance=ExtResource("14_disciple")]
+position = Vector2(95, 480)
+
+[node name="GameCamera" type="Camera2D" parent="." node_paths=PackedStringArray("follow_target")]
+position = Vector2(140, 480)
+limit_left = 0
+limit_right = 2880
+limit_bottom = 540
+script = ExtResource("2_camera")
+follow_target = NodePath("../Player")
+
+[node name="GameHUD" parent="." instance=ExtResource("8_hud")]
+
+[node name="QuestTracker" parent="." instance=ExtResource("9_tracker")]
+
+[node name="AwakeningMenu" parent="." instance=ExtResource("10_menu")]
+
+[node name="DialogueBox" parent="." instance=ExtResource("11_dialogue")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("15_pause")]

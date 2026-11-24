@@ -1,0 +1,219 @@
+[gd_scene load_steps=36 format=3 uid="uid://c7odfp1ntpdna"]
+
+[ext_resource type="PackedScene" path="res://entities/player/player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://core/components/game_camera.gd" id="2_camera"]
+[ext_resource type="PackedScene" path="res://entities/enemies/training_dummy.tscn" id="3_dummy"]
+[ext_resource type="PackedScene" path="res://world/shared/checkpoint.tscn" id="4_checkpoint"]
+[ext_resource type="PackedScene" path="res://ui/hud/game_hud.tscn" id="5_hud"]
+[ext_resource type="PackedScene" path="res://ui/awakening_menu/awakening_menu.tscn" id="6_menu"]
+[ext_resource type="PackedScene" path="res://ui/quest_log/quest_tracker.tscn" id="7_tracker"]
+[ext_resource type="PackedScene" path="res://ui/dialogue_box/dialogue_box.tscn" id="8_dialogue"]
+[ext_resource type="PackedScene" path="res://entities/npcs/quest_npc.tscn" id="9_npc"]
+[ext_resource type="PackedScene" path="res://world/shared/portal.tscn" id="10_portal"]
+[ext_resource type="Resource" path="res://data/quests/quest_village_trial.tres" id="11_q_trial"]
+[ext_resource type="Resource" path="res://data/dialogues/elder_intro.tres" id="12_e_intro"]
+[ext_resource type="Resource" path="res://data/dialogues/elder_progress.tres" id="13_e_prog"]
+[ext_resource type="Resource" path="res://data/dialogues/elder_turn_in.tres" id="14_e_turn"]
+[ext_resource type="Resource" path="res://data/dialogues/elder_after.tres" id="15_e_after"]
+[ext_resource type="Resource" path="res://data/quests/quest_ruins_sentinel.tres" id="16_q_ruins"]
+[ext_resource type="Resource" path="res://data/dialogues/scout_intro.tres" id="17_s_intro"]
+[ext_resource type="Resource" path="res://data/dialogues/scout_progress.tres" id="18_s_prog"]
+[ext_resource type="Resource" path="res://data/dialogues/scout_turn_in.tres" id="19_s_turn"]
+[ext_resource type="Resource" path="res://data/dialogues/scout_after.tres" id="20_s_after"]
+[ext_resource type="PackedScene" path="res://entities/npcs/master_npc.tscn" id="21_master"]
+[ext_resource type="Resource" path="res://data/quests/quest_rescue_disciple.tres" id="22_q_rescue"]
+[ext_resource type="Resource" path="res://data/quests/quest_teen_mastery.tres" id="23_q_teen"]
+[ext_resource type="Resource" path="res://data/dialogues/master_intro_1.tres" id="24_m_i1"]
+[ext_resource type="Resource" path="res://data/dialogues/master_turn_in_1.tres" id="25_m_t1"]
+[ext_resource type="Resource" path="res://data/dialogues/master_intro_2.tres" id="26_m_i2"]
+[ext_resource type="Resource" path="res://data/dialogues/master_turn_in_2.tres" id="27_m_t2"]
+[ext_resource type="Resource" path="res://data/dialogues/master_after.tres" id="28_m_after"]
+[ext_resource type="PackedScene" path="res://entities/allies/disciple.tscn" id="30_disciple"]
+[ext_resource type="PackedScene" path="res://ui/menus/pause_menu.tscn" id="31_pause"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(960, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(32, 420)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_sm"]
+size = Vector2(120, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_md"]
+size = Vector2(160, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_lg"]
+size = Vector2(180, 14)
+
+[node name="PeacefulVillage" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -10
+offset_left = -160.0
+offset_top = -220.0
+offset_right = 1120.0
+offset_bottom = 420.0
+color = Color(0.08, 0.09, 0.14, 1)
+
+[node name="DefaultSpawn" type="Marker2D" parent="."]
+position = Vector2(120, 308)
+
+[node name="FromRuinsSpawn" type="Marker2D" parent="."]
+position = Vector2(855, 308)
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="Ground" type="StaticBody2D" parent="Geometry"]
+position = Vector2(480, 324)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground"]
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="ColorRect" type="ColorRect" parent="Geometry/Ground"]
+offset_left = -480.0
+offset_top = -16.0
+offset_right = 480.0
+offset_bottom = 16.0
+color = Color(0.2, 0.24, 0.32, 1)
+
+[node name="LeftWall" type="StaticBody2D" parent="Geometry"]
+position = Vector2(-16, 150)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/LeftWall"]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="ColorRect" type="ColorRect" parent="Geometry/LeftWall"]
+offset_left = -16.0
+offset_top = -210.0
+offset_right = 16.0
+offset_bottom = 210.0
+color = Color(0.16, 0.19, 0.26, 1)
+
+[node name="RightWall" type="StaticBody2D" parent="Geometry"]
+position = Vector2(976, 150)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/RightWall"]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="ColorRect" type="ColorRect" parent="Geometry/RightWall"]
+offset_left = -16.0
+offset_top = -210.0
+offset_right = 16.0
+offset_bottom = 210.0
+color = Color(0.16, 0.19, 0.26, 1)
+
+[node name="PlatformLow" type="StaticBody2D" parent="Geometry"]
+position = Vector2(310, 262)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/PlatformLow"]
+shape = SubResource("RectangleShape2D_plat_sm")
+
+[node name="ColorRect" type="ColorRect" parent="Geometry/PlatformLow"]
+offset_left = -60.0
+offset_top = -7.0
+offset_right = 60.0
+offset_bottom = 7.0
+color = Color(0.26, 0.32, 0.42, 1)
+
+[node name="PlatformMid" type="StaticBody2D" parent="Geometry"]
+position = Vector2(520, 214)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/PlatformMid"]
+shape = SubResource("RectangleShape2D_plat_md")
+
+[node name="ColorRect" type="ColorRect" parent="Geometry/PlatformMid"]
+offset_left = -80.0
+offset_top = -7.0
+offset_right = 80.0
+offset_bottom = 7.0
+color = Color(0.26, 0.32, 0.42, 1)
+
+[node name="PlatformHigh" type="StaticBody2D" parent="Geometry"]
+position = Vector2(760, 166)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/PlatformHigh"]
+shape = SubResource("RectangleShape2D_plat_lg")
+
+[node name="ColorRect" type="ColorRect" parent="Geometry/PlatformHigh"]
+offset_left = -90.0
+offset_top = -7.0
+offset_right = 90.0
+offset_bottom = 7.0
+color = Color(0.26, 0.32, 0.42, 1)
+
+[node name="Checkpoint" parent="." instance=ExtResource("4_checkpoint")]
+position = Vector2(180, 308)
+
+[node name="ElderNPC" parent="." instance=ExtResource("9_npc")]
+position = Vector2(245, 308)
+display_name = "Foster Elder"
+quest_data = ExtResource("11_q_trial")
+intro_dialogue = ExtResource("12_e_intro")
+in_progress_dialogue = ExtResource("13_e_prog")
+turn_in_dialogue = ExtResource("14_e_turn")
+completed_dialogue = ExtResource("15_e_after")
+
+[node name="MasterNPC" parent="." instance=ExtResource("21_master")]
+position = Vector2(310, 308)
+quest_teen = ExtResource("22_q_rescue")
+quest_adult = ExtResource("23_q_teen")
+intro_teen_dialogue = ExtResource("24_m_i1")
+turn_in_teen_dialogue = ExtResource("25_m_t1")
+intro_adult_dialogue = ExtResource("26_m_i2")
+turn_in_adult_dialogue = ExtResource("27_m_t2")
+progress_dialogue = ExtResource("18_s_prog")
+completed_dialogue = ExtResource("28_m_after")
+
+[node name="ScoutNPC" parent="." instance=ExtResource("9_npc")]
+position = Vector2(815, 308)
+npc_id = &"npc_scout"
+display_name = "Ruins Scout"
+body_color = Color(0.95, 0.72, 0.28, 1)
+quest_data = ExtResource("16_q_ruins")
+intro_dialogue = ExtResource("17_s_intro")
+in_progress_dialogue = ExtResource("18_s_prog")
+turn_in_dialogue = ExtResource("19_s_turn")
+completed_dialogue = ExtResource("20_s_after")
+
+[node name="PortalToRuins" parent="." instance=ExtResource("10_portal")]
+position = Vector2(910, 308)
+target_scene_path = "res://world/ruins/ancient_ruins.tscn"
+target_spawn_point = &"FromVillageSpawn"
+portal_label = "Enter Ruins"
+
+[node name="TrainingDummyGround" parent="." instance=ExtResource("3_dummy")]
+position = Vector2(430, 308)
+
+[node name="TrainingDummyPlatform" parent="." instance=ExtResource("3_dummy")]
+position = Vector2(530, 207)
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(120, 308)
+
+[node name="Disciple" parent="." instance=ExtResource("30_disciple")]
+position = Vector2(96, 308)
+
+[node name="GameCamera" type="Camera2D" parent="." node_paths=PackedStringArray("follow_target")]
+position = Vector2(120, 308)
+limit_left = 0
+limit_right = 960
+limit_bottom = 360
+script = ExtResource("2_camera")
+follow_target = NodePath("../Player")
+
+[node name="GameHUD" parent="." instance=ExtResource("5_hud")]
+
+[node name="QuestTracker" parent="." instance=ExtResource("7_tracker")]
+
+[node name="AwakeningMenu" parent="." instance=ExtResource("6_menu")]
+
+[node name="DialogueBox" parent="." instance=ExtResource("8_dialogue")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("31_pause")]

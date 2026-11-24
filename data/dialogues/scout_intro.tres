@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/dialogues/dialogue_data.gd" id="1_dlg"]
+
+[resource]
+script = ExtResource("1_dlg")
+id = &"scout_intro"
+speaker_name = "Ruins Scout"
+lines = Array[String](["That portal leads to the Ancient Ruins—the energy inside resonates with your Ki.", "A mechanical guardian, the Ruins Sentinel, blocks the core chamber. Defeat it!"])

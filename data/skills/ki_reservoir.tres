@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SkillData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/skills/skill_data.gd" id="1_skill"]
+
+[resource]
+script = ExtResource("1_skill")
+id = &"ki_reservoir"
+display_name = "Ki Reservoir"
+description = "+30 Max Ki and +2 Ki/s regen."
+skill_type = 0
+essence_cost = 50
+required_core_shard = &""
+prerequisite_skill_id = &""

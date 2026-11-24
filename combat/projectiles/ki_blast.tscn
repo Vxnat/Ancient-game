@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://combat/projectiles/ki_blast.gd" id="1_kiblast"]
+[ext_resource type="Script" path="res://core/components/hitbox_component.gd" id="2_hitbox"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/vfx/ki_blast_frames.tres" id="3_frames"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ki"]
+size = Vector2(28, 18)
+
+[node name="KiBlast" type="Node2D"]
+script = ExtResource("1_kiblast")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = ExtResource("3_frames")
+animation = &"fly"
+autoplay = "fly"
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("2_hitbox")
+knockback_force = Vector2(140, -50)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_ki")
+
+[node name="WallDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallDetector"]
+shape = SubResource("RectangleShape2D_ki")

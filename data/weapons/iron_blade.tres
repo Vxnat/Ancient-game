@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/weapons/weapon_data.gd" id="1_weapon_data"]
+
+[resource]
+script = ExtResource("1_weapon_data")
+id = &"iron_blade"
+display_name = "Iron Blade"
+description = "A worn starter blade. Falls back to bare hands when durability reaches 0."
+category = 0
+base_damage = 15.0
+attack_range = 34.0
+attack_speed_multiplier = 1.0
+max_durability = 8
+repair_essence_cost = 20
+max_upgrade_level = 5
+damage_per_upgrade = 4.0
+upgrade_base_cost = 50

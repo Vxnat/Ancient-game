@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/quests/quest_data.gd" id="1_quest"]
+
+[resource]
+script = ExtResource("1_quest")
+id = &"ruins_sentinel"
+title = "Echoes of the Ruins"
+description = "Enter the Ancient Ruins and defeat the Ruins Sentinel."
+giver_npc_id = &"npc_scout"
+objective_type = 0
+target_id = &"ruins_sentinel"
+required_amount = 1
+reward_essence = 250
+reward_skill_id = &""

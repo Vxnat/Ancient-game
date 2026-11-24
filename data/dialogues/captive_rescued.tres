@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/dialogues/dialogue_data.gd" id="1_dlg"]
+
+[resource]
+script = ExtResource("1_dlg")
+id = &"captive_rescued"
+speaker_name = "Disciple"
+lines = Array[String](["Thank you for defeating the Warden! My name is Ren—let me fight by your side as your Disciple.", "When we both have 40+ Ki, press [F] to FUSE for 15 seconds!"])

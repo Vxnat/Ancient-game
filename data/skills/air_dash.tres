@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SkillData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/skills/skill_data.gd" id="1_skill"]
+
+[resource]
+script = ExtResource("1_skill")
+id = &"air_dash"
+display_name = "Air-Dash"
+description = "Dash once in mid-air (press Shift). Awakened from the Wind Core Shard."
+skill_type = 2
+essence_cost = 0
+required_core_shard = &"air_dash_core"
+prerequisite_skill_id = &""

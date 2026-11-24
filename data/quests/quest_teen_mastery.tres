@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/quests/quest_data.gd" id="1_quest"]
+
+[resource]
+script = ExtResource("1_quest")
+id = &"teen_mastery"
+title = "Path of Maturity"
+description = "Hone your Teen form in the Ruins by defeating 2 Ruins Stalkers."
+giver_npc_id = &"npc_master"
+objective_type = 0
+target_id = &"ruins_stalker"
+required_amount = 2
+reward_essence = 300
+reward_skill_id = &""

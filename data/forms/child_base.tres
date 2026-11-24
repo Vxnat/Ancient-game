@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="FormData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/forms/form_data.gd" id="1_form"]
+
+[resource]
+script = ExtResource("1_form")
+id = &"child_base"
+display_name = "Base"
+damage_multiplier = 1.0
+speed_multiplier = 1.0
+hitbox_scale = Vector2(1, 1)
+ki_drain_per_sec = 0.0
+hp_drain_per_sec = 0.0
+form_skills = Array[StringName]([])

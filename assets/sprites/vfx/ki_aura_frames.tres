@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://c5sv5it1lbgjy"]
+
+[ext_resource type="Texture2D" uid="uid://cl8d3hreey5jw" path="res://assets/sprites/vfx/ki_aura.png" id="1_l78jn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mm6ea"]
+atlas = ExtResource("1_l78jn")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1c48"]
+atlas = ExtResource("1_l78jn")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pocn5"]
+atlas = ExtResource("1_l78jn")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eeqkn"]
+atlas = ExtResource("1_l78jn")
+region = Rect2(288, 0, 96, 96)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mm6ea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1c48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pocn5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eeqkn")
+}],
+"loop": true,
+"name": &"aura",
+"speed": 12.0
+}]
