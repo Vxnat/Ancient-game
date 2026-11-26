@@ -1,81 +1,73 @@
-# Game Design Document (GDD) — Project Origin
+# Game Design Document (GDD – V3 FINAL) — *GARO: Hành Trình Hoàng Kim*
 
-## 1. High Concept
-- **Thể loại:** 2D Pixel Art Action-Platformer / Metroidvania + Action RPG
-- **Bối cảnh:** Science Fantasy phiêu lưu tươi sáng, rực rỡ (hành tinh yên bình ấm áp xen lẫn tàn tích công nghệ cổ đại và năng lượng Khí huyền bí).
-- **Cảm hứng:** Nhịp độ chiến đấu tốc độ cao, Khí, biến hình và hợp thể lấy cảm hứng từ *Dragon Ball* phần đầu đến trưởng thành, đặt trong cấu trúc khám phá Metroidvania.
-- **Quy mô phát triển:** Solo Developer. (Xem chi tiết mỹ thuật tại [ART_SPEC.md](file:///c:/Hoc_Tap/Game-new/ART_SPEC.md)).
+**Tên dự án (tạm gọi):** *GARO: Hành Trình Hoàng Kim* (Saejima Kouga)  
+**Engine & Kỹ thuật:** Godot `4.3-stable`, 2D Pixel Art (`960×540` viewport, `default_texture_filter = Nearest`)  
+**Thể loại:** Hành động – Nhập vai (Action RPG), Chặt chém chiến thuật (Tactical Hack & Slash)  
+**Cấu trúc vận hành:** Tuyến tính theo Hồi kết hợp **Hub & Mission** ở giai đoạn chính
 
-## 2. Bối cảnh & Cốt truyện tóm tắt
-- **Biến cố:** Quê hương của nhân vật chính — một nền văn minh chiến binh kết hợp công nghệ và Khí — bị hủy diệt bởi một thảm họa bí ẩn. Trước khi sụp đổ, bạn được đưa vào khoang thoát hiểm phóng sang hành tinh khác.
-- **Mở đầu:** Bạn rơi xuống một **hành tinh yên bình** và được một người dân địa phương nhận nuôi, sống và tập luyện từ nhỏ.
-- **Hành trình:** Sau biến cố/lời kêu gọi của nguồn cội, bạn bước vào cuộc phiêu lưu khám phá các vùng đất bị chia cắt, chiến đấu để tìm hiểu: *Mình là ai? Điều gì đã xảy ra với quê hương?*
-- **Phát triển dài hạn:** Nhân vật trưởng thành từ **Nhỏ → Lớn**, thu nhận **Đệ tử** (hỗ trợ chiến đấu) và mở khóa kỹ năng **Hợp thể (Fusion)**.
+---
 
-## 3. Core Gameplay Loop
-1. **Chiến đấu (Combat):**
-   - **Đánh tay (Võ thuật) + Nhiều loại Vũ khí:** Vũ khí có **độ bền (durability)**. Khi vũ khí hỏng giữa trận, nhân vật tự động chuyển về đánh tay + dùng Khí để xoay xở.
-   - **Né đòn & Khí:** Dash có bất tử khung hình (*i-frame*), bắn chưởng Khí tầm xa, và kích hoạt trạng thái **Overdrive (Quá Tải)** để tăng vọt sức mạnh (đi kèm rủi ro tiêu hao Khí/Máu).
-2. **Tiến trình RPG & Kinh tế (1 loại tiền tệ duy nhất):**
-   - **Tinh Chất (Essence):** Rơi ra từ quái thường và thưởng nhiệm vụ. Dùng để **Thức Tỉnh chỉ số/nội tại**, đồng thời **bảo quản (sửa chữa) và nâng cấp vũ khí**.
-3. **Tiến trình Metroidvania & Cốt truyện:**
-   - **Mảnh Lõi (Core Shard):** Rơi ra từ Boss hoặc giấu ở tàn tích cổ. Mỗi Mảnh Lõi mở khóa **kỹ năng di chuyển/chiến đấu lớn** (Air-Dash, Chưởng phá tường, Overdrive, Fusion...) và hé lộ ký ức quê hương.
-   - **Nhiệm vụ (Quests):** Kết hợp nhiệm vụ cốt truyện và nhiệm vụ phụ từ NPC (đánh quái, hạ Boss, tìm vật phẩm).
+## 1. Tầm nhìn & Trụ cột Thiết kế (Core Pillars)
+- **Đồng điệu Tự sự – Cơ chế (Ludonarrative Harmony):** Sự trưởng thành của Saejima Kouga từ năm 8 tuổi đến khi trở thành Hoàng Kim Kỵ Sĩ được cảm nhận trực tiếp qua tay cầm và **thanh kiếm Garoken** (từ kiếm gỗ yếu ớt → cầm 2 tay nặng nề có độ trễ → xoay kiếm 1 tay sắc lẹm), không chỉ qua chỉ số hay cắt cảnh.
+- **Áp lực Sinh tử 99.9 giây (Active Time Risk & Reward):** Bộ giáp Garo mang lại sức mạnh áp đảo nhưng vận hành như một quả bom hẹn giờ thực thụ. Thời gian không đứng yên để người chơi xả sát thương thoải mái mà bị bào mòn trực tiếp bởi sát thương nhận vào và kỹ năng cường hóa.
+- **Phân hóa Vai trò Chiến đấu:** Tách bạch rõ giá trị của **Dạng Người** (tốc độ, dò điểm yếu, phản đòn) và **Dạng Giáp** (áp đảo, phá giai đoạn Boss), kết hợp hệ thống **Tà Khí (Inga)** và tuyến nhân vật phụ (**Kaoru**, **Zaruba**) trực tiếp vào vòng lặp chuẩn bị trước trận đánh.
+- **Chiến lược Phát triển Solo Dev:** Dựng hoàn chỉnh **Vertical Slice Hồi 3** (với lõi `Human → Garo 99.9s → Tâm Diệt → Exhausted` + 1 Boss Horror) trước, sau đó mới mở rộng dần Hub & từng Hồi cốt truyện để tránh ngợp phạm vi.
 
-## 4. Phạm vi MVP (Bản chơi thử đầu tiên)
-Để tránh quá tải cho solo dev, MVP chỉ tập trung vào:
-- 1 khu vực mở đầu (*Hành tinh yên bình*: 1 NPC giao nhiệm vụ, trạm nghỉ để Thức Tỉnh & Sửa vũ khí).
-- 1 khu vực phiêu lưu (*Tàn tích đầu tiên*: 2 loại quái thường + 1 Boss).
-- Player hoàn chỉnh di chuyển cơ bản, đánh tay, 1 vũ khí mẫu có độ bền, và 1 chiêu Khí cơ bản.
+---
 
-## 5. Thông số & Cơ chế Cốt lõi (Gameplay Specs)
+## 2. Cấu trúc Cốt truyện & Nhịp độ 5 Giai đoạn (Lộ trình Dài hạn)
+Tổng thời lượng game dồn **70%** trọng tâm vào giai đoạn trưởng thành (Hồi 3–4) để tránh khởi đầu chậm, trong khi vẫn giữ trọn sức nặng cảm xúc ở quá khứ của Kouga:
 
-### 5.1. Di chuyển & Game Feel (`Player`, Viewport `960×540`)
-| Cơ chế | Phím | Thông số hiện tại | Ghi chú |
+| Giai đoạn | Tỷ lệ & Thời lượng | Nhân vật & Cảm giác điều khiển | Nội dung cốt truyện chính | Cơ chế trọng tâm |
+| :--- | :--- | :--- | :--- | :--- |
+| **Prologue** *(Mở màn)* | **5%** *(5–10 phút)* | **Saejima Taiga** *(Mặc sẵn giáp Garo mắt đỏ)* | Đi săn Horror và chạm trán bước đầu với Barago. Tạo cú sốc tương phản trước khi chuyển sang Kouga 8 tuổi. | Combo mượt, né đòn và kết liễu; ẩn toàn bộ UI phức tạp (Tà Khí, đồng hồ, bật lửa). |
+| **Hồi 1** *(Tuổi thơ)* | **10%** *(15–20 phút)* | **Kouga 8 tuổi** *(Kiếm gỗ ngắn, lực đánh yếu)* | Luyện tập khắc nghiệt cùng cha tại dinh thự. Đêm bi kịch: Taiga bị Barago (Kiba) sát hại trước mắt Kouga. | Di chuyển, né tránh, căn nhịp **Parry** qua bẫy Gonza; kết hồi bằng *scripted loss* với Barago. |
+| **Hồi 2** *(Thiếu niên)* | **15%** *(30–45 phút)* | **Kouga 16 tuổi** *(Garoken cầm 2 tay, vung chậm, giật lùi khi đỡ)* | Rèn luyện trong cô độc, vượt thử thách Sở Phiên Khuyển và đối mặt Tâm Ma (ảo ảnh của cha). | Mở **Bật lửa Ma Đạo Hỏa**; lần đầu gọi giáp (`99.9s` trôi `2.0x` và trừ `5–10s` khi trúng đòn/vung chém nặng). |
+| **Hồi 3** *(Trưởng thành)* | **50%** *(Trọng tâm)* | **Kouga 20+ tuổi** *(Garoken 1 tay điêu luyện + Full Giáp)* | Bảo vệ Khu Đông; gặp **Mitsuki Kaoru**, đối đầu **Suzumura Rei (Zero)** và đồng hành cùng pháp sư **Jabi**. | Vòng lặp **Hub & Mission**: Điều tra → Phá vỏ dạng người → Garo `99.9s` → Thanh tẩy kiếm → Buff Kaoru. |
+| **Hồi 4** *(Cao trào)* | **20%** *(Đỉnh điểm)* | **Garo Hoàn thiện** *(Làm chủ Tâm Diệt + Dực Nhân Nha Lang)* | Âm mưu Tam Thần Quan nổ ra. Giải cứu Jabi, hạ thủy tổ **Messiah** tại Ma Giới và quyết đấu Barago. | Boss tốc độ cao (Kiba/Barago); màn cưỡi chiến mã **Gōten** & bay **Tsubasabito** dạng *Set-piece*. |
+
+---
+
+## 3. Hệ thống Bản đồ & Thiết kế Màn chơi (Dài hạn)
+Thay thế thế giới mở bằng cấu trúc **1 Hub Trung Tâm + Các Map Nhiệm Vụ khép kín**:
+1. **Dinh thự Saejima (Hub):** Sân tập (Hồi 1–2 phóng đại tỷ lệ cho Kouga 8t) → Căn cứ tác chiến trung tâm (Hồi 3–4): **Tượng Sói Thanh Tẩy** (rút Tà Khí `Inga`), **Góc vẽ của Kaoru** (nhận buff), **Sân tập & Thư viện**.
+2. **Đô Thị Đêm — Khu Đông (Map Mission):** Bảo tàng nghệ thuật, Ga tàu điện ngầm, Cao ốc bỏ hoang (dùng Ma Đạo Hỏa quét vật chủ Horror → kéo vào kết giới chiến đấu).
+3. **Rừng Ma Giới & Đền Thờ:** Giải đố ánh sáng lửa xanh Zaruba; môi trường chướng khí làm **Tà Khí (Inga)** tăng nhanh hơn.
+4. **Tâm Cảnh (Đấu trường nội tâm):** Đấu ảo ảnh cha (Hồi 2) và chế độ luyện tập / **Boss Rush** (Hồi 3–4).
+5. **Sở Phiên Khuyển, Lâu Đài Gương & Ma Giới:** Các màn tuyến tính cao trào cuối game (*Set-piece* Messiah & quyết đấu Barago).
+
+---
+
+## 4. Hệ thống Chiến đấu & Máy Trạng thái (Core Combat Specs — Hồi 3)
+
+### 4.1. Máy Trạng thái 4 Pha của Saejima Kouga
+| Trạng thái (`State`) | Vai trò chiến thuật | Thông số & Cơ chế vận hành | Điều kiện chuyển đổi |
 | :--- | :--- | :--- | :--- |
-| Chạy trái/phải | `A` / `D` | Tốc độ gốc `230 px/s`, gia tốc mặt đất `2400` | Kiểm soát trên không `0.65x` |
-| Nhảy | `Space` | Lực nhảy `-470`, trọng lực lên `1150`, rơi `1.8x` | `Coyote Time` 6 ticks (~0.10s), `Jump Buffer` 7 ticks (~0.12s), thả sớm cắt vận tốc `0.45x`, `Apex Hang` `0.5x` |
-| Dash | `Shift` | Tốc độ `480 px/s`, thời lượng `0.15s`, hồi `0.28s` | Miễn nhiễm sát thương (*i-frame*) + hiệu ứng bóng mờ `DashGhost` |
-| Hitstop & Shake | Tự động | Khựng `0.055s` (`time_scale = 0.05`), Trauma `+0.35` | Kích hoạt khi đòn cận chiến trúng mục tiêu |
+| **1. `Human`** *(Dạng người)* | Thăm dò, phá ngụy trang, tích tài nguyên | Tốc độ `1.0×` (`~230 px/s`), khung **Parry** rộng. **Bật lửa Ma Đạo Hỏa (`K`):** đốt lớp vỏ bóng tối / lộ điểm yếu chí mạng Horror trong `5.0s`. Đánh trúng / Parry thành công tích thanh **Ý Chí (`0–100`)**. | Thanh Ý Chí đạt `100` + kích hoạt Triệu hồi (`L`) → **`GaroArmor`**. |
+| **2. `GaroArmor`** *(Hoàng Kim Giáp)* | Bùng nổ sát thương, ép góc, phá Phase Boss | Đồng hồ đếm ngược **`99.9s`** (*Active Time Drain*): mặc định trôi `1.0×`. Bật **Viêm Nhận** (Zaruba thổi lửa xanh ngọc vào kiếm): sát thương tăng từ `2.2×` lên `3.0×`, đồng hồ trôi `1.8×`. Có *Super Armor*, ăn đòn trực diện bị **trừ thẳng `5.0s`**. | • Chủ động giải giáp (`L`) trước `00.0` → **`Human`** *(Ý Chí về `0`)*.<br>• Chạm `00.0` → **`LostSoulBeast`**. |
+| **3. `LostSoulBeast`** *(Tâm Diệt Thú Thân)* | Sinh tử `10–12s`, sát thương cực đại, cấm lạm dụng | Sát thương **`3.5×`**, tốc độ đánh tăng vọt. Máu tự rút **`8% / giây`**, màn hình tối viền & nhiễu đỏ. Từ giây thứ `5`, **Zaruba** kích hoạt chuỗi **QTE** cứu mạng. | • Hạ Boss trước khi cạn máu → **Thắng**.<br>• Chuẩn QTE → **`Exhausted`**.<br>• Cạn HP / trượt QTE → **Game Over**. |
+| **4. `Exhausted`** *(Kiệt sức)* | Án phạt chống lạm dụng Tâm Diệt, tạo sinh tồn | Trở về **`Human`**, máu tụt thẳng về **`1 HP`**. Thanh Ý Chí bị **khóa cứng `45s`**. **Thưởng kỹ năng:** mỗi cú **Perfect Parry** giảm ngay **`7s`** thời gian khóa giáp. | Hết thời gian khóa → **`Human`** *(mở lại tích Ý Chí)*. |
 
-### 5.2. Chiến đấu, Khí (Ki) & Overdrive
-| Cơ chế | Phím | Chi phí / Hồi phục | Hiệu ứng chi tiết |
-| :--- | :--- | :--- | :--- |
-| Đánh cận chiến | `J` | Hồi `+6 Ki` khi trúng (lúc không Overdrive) | **Combo 3 đòn** có Input Buffer (cửa sổ giữ nhịp `0.45s`, cắt đòn bằng Dash): Nhịp 1 (`0.34s`, `1.0×` dmg), Nhịp 2 (`0.36s`, `1.15×` dmg, `1.12×` tầm), Nhịp 3 kết thúc (`0.44s`, **bước mạnh tới trước `290 px/s`**, `1.45×` dmg, `1.25×` tầm, `1.65×` knockback). Ngoài ra có **Air Attack** (`Jump/Fall + J`, `1.1×` dmg, hãm rơi nhẹ) và **Dash Attack** (`Dash + J`, lướt đâm `330 px/s`, `1.25×` dmg, kèm `DashGhost`) |
-| Bắn chưởng Ki | `K` | Tốn `20 Ki` | Sát thương gốc `14` (+ bonus từ *Martial Focus*), bay `380 px/s`, sprite cầu Khí `48×48` (`fly`/`hit`), nhân sát thương & phóng to `1.35×` khi Overdrive/Fusion |
-| **Overdrive Ki Beam** (`SpecialSkill`) | `U` | **Chỉ dùng khi đang Overdrive hoặc Fusion**; tốn `30 Ki` | Gồng tung sóng Khí ngang (`OverdriveBeam` `160×80`), xuyên nhiều mục tiêu tầm `156 px` với **`3.0×`** sát thương gốc (theo hệ số dạng biến hình) |
-| Hồi Ki tự nhiên | Tự động | `+6 Ki/s` (tắt khi đang Overdrive) | Ki tối đa mặc định `100` |
-| **Overdrive** | `L` | **Mở khóa từ giai đoạn `Adult`**; tối thiểu `25 Ki`; tốn `10 Ki/s` + `2 HP/s` | Gồng biến hình `overdrive_in` (`0.45s`), chuyển sang bộ sprite `Adult Overdrive` tóc vàng dựng & mắt xanh ngọc, **tạm khóa gậy để đánh tay không bộ combo riêng** (*Rapid Golden Flurry* → *Spinning Thunder Kick* → *Ki-Burst Double Palm*, kèm *Meteoric Dive Kick* & *Sonic Dash Fist*, không tốn độ bền vũ khí); tăng `1.4x` sát thương (tổng `2.1x` ở Adult) và `1.4x` tốc độ; khi tắt `L` hoặc hết Ki sẽ phát `overdrive_out` (`0.40s`) trước khi hồi dạng thường |
+*(Lưu ý kỹ thuật Godot 2D: Điều khiển di chuyển cơ bản giữ nguyên nền `960×540` mượt mà: chạy `A/D`, nhảy `Space` có Coyote Time `6 ticks` + Jump Buffer `7 ticks`, lướt né `Shift` có `i-frames`, cận chiến `J` có Hitstop + Camera Shake.)*
 
-### 5.3. Vũ khí & Độ bền (`WeaponInstance`)
-- **Đánh tay mặc định:** Sát thương gốc `10`, tầm đánh `32 px` (tự động kích hoạt khi không có vũ khí hoặc độ bền vũ khí = `0`).
-- **Vũ khí mẫu (`Traveler's Staff` - Gậy):** `+15` sát thương, tầm đánh `46 px`, độ bền tối đa `8`, trừ `1` độ bền mỗi đòn đánh trúng.
-- **Bảo quản & Nâng cấp (tại Checkpoint):**
-  - **Sửa chữa:** Tốn **Tinh Chất** tỷ lệ theo lượng độ bền đã mất (tối đa `20 Tinh Chất` khi hỏng hoàn toàn).
-  - **Nâng cấp:** Tối đa `Lv.5`, mỗi cấp `+4` sát thương và hồi đầy độ bền; chi phí `50 × (cấp hiện tại + 1)`.
+### 4.2. Hệ thống Đồng hành & Chuẩn bị (Giai đoạn mở rộng Hub)
+- **Ma Đạo Luân Zaruba:** Đồng hành cốt truyện & kỹ năng (*thoại hướng dẫn/cảnh báo Horror, kích lửa xanh **Viêm Nhận**, gọi **QTE** thoát Tâm Diệt*), không có Đệ tử chiến đấu hay `Fusion`.
+- **Thanh Tà Khí (`Inga`, `0–100%`):** Tích tụ khi diệt Horror và tăng vọt nếu rơi vào *Tâm Diệt*. Tà Khí cao tăng nhẹ sát thương Garoken nhưng đẩy nhanh tốc độ tụt `99.9s` và tăng xác suất phục kích; có thể xả về `0%` tại **Tượng Sói Thanh Tẩy** ở Dinh thự.
+- **Buff "Tĩnh Tâm" (Kaoru):** Trò chuyện / xem tranh tại Dinh thự cho buff 1 nhiệm vụ kế tiếp: làm chậm tốc độ tích `Inga` và **nới rộng cửa sổ QTE** khi thoát *Tâm Diệt* (vẫn giữ nguyên án phạt `1 HP` & khóa `45s`).
 
-### 5.4. Thức Tỉnh Sức Mạnh (`Awakening Menu` tại Checkpoint `[E]`)
-Khi đứng gần **Checkpoint** và bấm `E`: hồi đầy Máu/Ki, tự động lưu game qua `SaveManager`, và mở bảng nâng cấp:
-| Kỹ năng (`SkillData.tres`) | Chi phí | Hiệu ứng vĩnh viễn |
-| :--- | :--- | :--- |
-| **Vitality Surge** | `50 Tinh Chất` | `+25` Máu tối đa |
-| **Ki Reservoir** | `50 Tinh Chất` | `+30` Ki tối đa và `+2 Ki/s` hồi tự nhiên |
-| **Martial Focus** | `75 Tinh Chất` | `+4` Sát thương gốc (áp dụng cho cả cận chiến & chưởng Ki) |
-| **Swift Step** | `60 Tinh Chất` | `+25 px/s` Tốc độ chạy |
+---
 
-### 5.5. Quái, Boss & Kinh tế MVP
-- **Training Dummy (`peaceful_village`):** `60 HP`, rơi `25 Tinh Chất`, tự hồi sinh sau `2s`.
-- **Ruins Stalker (`ancient_ruins`):** `55 HP`, tuần tra & đuổi theo Player, đánh cận chiến (`14` sát thương), rơi `35 Tinh Chất`.
-- **Ruins Sentinel (Boss đầu tiên):** `220 HP`, có 2 đòn báo hiệu (*Lunge Slash* `22` sát thương và *Energy Wave* `18` sát thương), rơi `100 Tinh Chất` và **Mảnh Lõi Gió (`air_dash_core`)**.
+## 5. Đặc tả Bản mẫu Vertical Slice – Hồi 3 (Ưu tiên Thực thi Ngay)
+Dự án **bắt buộc dựng bản mẫu từ Hồi 3 trước** để kiểm chứng lõi chiến đấu trước khi làm nội dung Hồi 1–2, Hub và Hồi 4:
 
-### 5.6. Nhiệm vụ & Kỹ năng Metroidvania (MVP)
-- **Trial of Strength (`Foster Elder`):** Hạ `2 Training Dummy` → thưởng `100 Tinh Chất`.
-- **Echoes of the Ruins (`Ruins Scout`):** Vào cổng sang `ancient_ruins` và hạ `Ruins Sentinel` → thưởng `250 Tinh Chất`.
-- **Air-Dash (`air_dash_core`):** Mở khóa từ Mảnh Lõi của Boss; cho phép bấm `Shift` lướt thêm `1` lần trên không (hồi lại khi chạm đất), dùng để nhảy sang bệ bí mật lấy `Essence Cache` (`120 Tinh Chất`).
+| Trong phạm vi Vertical Slice (In-Scope) | Để sang Giai đoạn sau (Out-of-Scope) |
+| :--- | :--- |
+| 1 đấu trường phẳng khép kín + 1 Boss Horror hoàn chỉnh 2 Phase. | Hub Dinh thự Saejima, thư Sở Phiên Khuyển và Kaoru. |
+| Đủ hành động Dạng Người: Chạy, Né (`i-frames`), **Parry**, combo 4 đòn, Bật lửa **Ma Đạo Hỏa (`K`)**. | Nhân vật Saejima Taiga, Kouga 8 tuổi và Kouga 16 tuổi. |
+| Máy trạng thái 4 pha: `Human → GaroArmor (99.9s Active Drain) → LostSoulBeast (Tâm Diệt + QTE) → Exhausted (1 HP / khóa 45s / -7s Perfect Parry)`. | Thanh Tà Khí (`Inga`), Tượng Sói Thanh Tẩy và cây kỹ năng. |
+| Hoàn thiện Game Feel: *hitstop*, rung màn hình, âm thanh va chạm Linh Kim, VFX lửa xanh Zaruba. | Màn *Set-piece* Gōten, Dực Nhân Nha Lang và cắt cảnh cốt truyện. |
 
-### 5.7. Trưởng thành (Nhỏ → Thiếu niên → Trưởng thành), Đệ tử & Hợp thể
-- **Sư phụ (`Master Kael`):**
-  1. Giao nhiệm vụ **The Captive Warrior** (hạ Boss `Prison Warden` `180 HP` ở phía đông Tàn tích, giải cứu con tin làm **Đệ tử**) → thưởng `200 Tinh Chất` + **Timeskip 3 năm** chuyển lên dạng **Thiếu niên (`teen`: `1.25x` sát thương, `1.1x` tốc độ, vóc dáng cao hơn)**.
-  2. Giao nhiệm vụ **Path of Maturity** (hạ `2 Ruins Stalker`) → thưởng `300 Tinh Chất` + **Timeskip 4 năm** chuyển lên dạng **Trưởng thành (`adult`: `1.5x` sát thương, `1.2x` tốc độ)**.
-- **Đệ tử (`Disciple`):** Đi theo Player, tự tấn công quái trong tầm `160 px` bằng `player_hitbox` (không gây sát thương lên Player).
-- **Hợp thể (`Fusion` — phím `F`):** Yêu cầu đã có Đệ tử, tối thiểu `40 Ki` và hết hồi chiêu; kéo dài **`15s`** (tăng `2.2x` sát thương, `1.35x` tốc độ, hào quang tím-bạch kim riêng, không bị tụt máu), sau đó tách Đệ tử ra và hồi chiêu **`30s`**.
+- **Thiết kế Boss Horror đầu tiên (Vertical Slice):**
+  - *Phase 1 (100% → 60% HP):* Lớp vỏ bóng tối giảm **70% sát thương vật lý**. Buộc dùng **Dạng Người** né/parry, hắt **Ma Đạo Hỏa** đốt vỏ (lộ điểm yếu `5s`) và tích đầy **Ý Chí (`100`)**.
+  - *Phase 2 (60% → 0% HP):* Lộ bản thể quái vật với 4–5 chiêu diện rộng có báo hiệu (*telegraph*). Gọi **Giáp Garo**, tận dụng *Super Armor* + **Viêm Nhận** ép sát thương, chủ động giải giáp kịp trước khi Boss đánh tụt cạn `99.9s`.
+- **Tiêu chuẩn cân bằng Mốc 3:** `1` trận Boss chuẩn cần gọi giáp **`~2 lần`**, và ít nhất **`1 lần` đồng hồ tụt xuống dưới `15s`** để chạm ranh giới *Tâm Diệt Thú Thân*.
